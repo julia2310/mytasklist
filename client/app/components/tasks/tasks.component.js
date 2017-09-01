@@ -9,33 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var task_service_1 = require("../../services/task.service");
-var TasksComponent = /** @class */ (function () {
-    function TasksComponent(taskService) {
-        var _this = this;
+const core_1 = require("@angular/core");
+const task_service_1 = require("../../services/task.service");
+let TasksComponent = class TasksComponent {
+    constructor(taskService) {
         this.taskService = taskService;
         this.taskService.getTasks()
-            .subscribe(function (tasks) {
-            _this.tasks = tasks;
+            .subscribe(tasks => {
+            this.tasks = tasks;
         });
     }
-    TasksComponent.prototype.addTask = function (event) {
-        var _this = this;
+    addTask(event) {
         event.preventDefault();
         var newTask = {
             title: this.title,
             isDone: false
         };
         this.taskService.addTask(newTask)
-            .subscribe(function (task) {
-            _this.tasks.push(task);
-            _this.title = '';
+            .subscribe(task => {
+            this.tasks.push(task);
+            this.title = '';
         });
-    };
-    TasksComponent.prototype.deleteTask = function (id) {
+    }
+    deleteTask(id) {
         var tasks = this.tasks;
-        this.taskService.deleteTask(id).subscribe(function (data) {
+        this.taskService.deleteTask(id).subscribe(data => {
             if (data.n == 1) {
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i]._id == id) {
@@ -44,25 +42,24 @@ var TasksComponent = /** @class */ (function () {
                 }
             }
         });
-    };
-    TasksComponent.prototype.updateStatus = function (task) {
+    }
+    updateStatus(task) {
         var _task = {
             _id: task._id,
             title: task.title,
             isDone: !task.isDone
         };
-        this.taskService.updateStatus(_task).subscribe(function (data) {
+        this.taskService.updateStatus(_task).subscribe(data => {
             task.isDone = !task.isDone;
         });
-    };
-    TasksComponent = __decorate([
-        core_1.Component({
-            selector: 'tasks',
-            templateUrl: 'tasks.component.html'
-        }),
-        __metadata("design:paramtypes", [task_service_1.TaskService])
-    ], TasksComponent);
-    return TasksComponent;
-}());
+    }
+};
+TasksComponent = __decorate([
+    core_1.Component({
+        selector: 'tasks',
+        templateUrl: 'tasks.component.html'
+    }),
+    __metadata("design:paramtypes", [task_service_1.TaskService])
+], TasksComponent);
 exports.TasksComponent = TasksComponent;
-//# sourceMappingURL=tasks.components.js.map
+//# sourceMappingURL=tasks.component.js.map

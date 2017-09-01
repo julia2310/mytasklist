@@ -9,39 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
+const core_1 = require("@angular/core");
+const http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
-var TaskService = (function () {
-    function TaskService(http) {
+let TaskService = class TaskService {
+    constructor(http) {
         this.http = http;
         console.log('Task Service Initialized...');
     }
-    TaskService.prototype.getTasks = function () {
+    getTasks() {
         return this.http.get('/api/tasks')
-            .map(function (res) { return res.json(); });
-    };
-    TaskService.prototype.addTask = function (newTask) {
+            .map(res => res.json());
+    }
+    addTask(newTask) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post('/api/task', JSON.stringify(newTask), { headers: headers })
-            .map(function (res) { return res.json(); });
-    };
-    TaskService.prototype.deleteTask = function (id) {
+            .map(res => res.json());
+    }
+    deleteTask(id) {
         return this.http.delete('/api/task/' + id)
-            .map(function (res) { return res.json(); });
-    };
-    TaskService.prototype.updateStatus = function (task) {
+            .map(res => res.json());
+    }
+    updateStatus(task) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.put('/api/task/' + task._id, JSON.stringify(task), { headers: headers })
-            .map(function (res) { return res.json(); });
-    };
-    TaskService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
-    ], TaskService);
-    return TaskService;
-}());
+            .map(res => res.json());
+    }
+};
+TaskService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], TaskService);
 exports.TaskService = TaskService;
 //# sourceMappingURL=task.service.js.map
