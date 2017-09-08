@@ -57,7 +57,7 @@ let TasksComponent = class TasksComponent {
 TasksComponent = __decorate([
     core_1.Component({
         selector: 'tasks',
-        templateUrl: 'tasks.component.html'
+        templateUrl: '/app/components/tasks/tasks.component.html'
     }),
     __metadata("design:paramtypes", [task_service_1.TaskService])
 ], TasksComponent);
